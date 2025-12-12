@@ -1,3 +1,4 @@
+import random
 # 1. Cadastre em um dicionário 5 produtos e seus respectivos preços, depois mostre o conteúdo do dicionário com um produto por linha.
 # 1. Register 5 products and their respective prices in a dictionary, then show the dictionary content with one product per line.
 
@@ -71,3 +72,25 @@ for worker in employees:
 
 average = total_salary / len(employees)
 print(f"\nAverage Salary: $ {average:.2f}")
+
+# 5 Cadastre em uma tupla 5 nomes. Em seguida crie um dicionário, onde a chave deverá ser um número aleatório entre 0 e 100 e o valor deverá ser os nomes cadastrados na tupla.
+# 5. Register 5 names in a tuple. Then, create a dictionary where the keys are random numbers between 0 and 100, and the values are the names from the tuple.
+
+temp_list = []
+
+for i in range(5):
+    name = input("Digite o nome: ")
+    temp_list.append(name)
+
+names_tuple = tuple(temp_list)
+
+random_dict = {}
+
+for name in names_tuple:
+    random_key = random.randint(0, 100)
+
+    while random_key in random_dict:
+        random_key = random.randint(0, 100)
+    random_dict[random_key] = name
+
+print(random_dict)
