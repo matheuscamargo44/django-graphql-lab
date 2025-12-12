@@ -42,3 +42,32 @@ peripherals = {
 inventory = [hardware, peripherals]
 
 print(inventory)
+
+# 4. Cadastre 5 funcionários em um dicionário, pelo teclado, com as seguintes chaves: nome, idade, cargo, salário. No final, mostre o conteúdo do dicionário e a média dos salários.
+# 4. Register 5 employees in a dictionary via keyboard input containing: name, age, position, salary.
+employees = []
+
+for i in range(5):
+    name = input("Type the name: ")
+    age = int(input("Type the age: "))
+    position = input ("Type the position: ")
+    salary = float(input("Type the salary: "))
+
+    worker = {
+        "Name": name,
+        "Age" : age,
+        "Position" : position,
+        "Salary": salary 
+    }
+
+    employees.append(worker)
+
+print (employees)  
+
+total_salary = 0
+
+for worker in employees:
+    total_salary += worker["Salary"]
+
+average = total_salary / len(employees)
+print(f"\nAverage Salary: $ {average:.2f}")
