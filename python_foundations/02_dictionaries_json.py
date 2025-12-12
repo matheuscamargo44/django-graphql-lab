@@ -10,7 +10,7 @@ products = {
 }
 
 for product, price in products.items():
-    print(f"Product: {product} | Price: {price:.2f}         ")
+    print(f"Product: {product} | Price: {price:.2f}")
 
 # 2. Carregue um dicionário onde a chave seja o nome de um aluno e o valor seja uma lista contendo 3 notas desse aluno. No final, imprima as notas e as médias de cada aluno.
 # 2. Create a dictionary where the key is the student's name and the value is a list containing 3 grades. Finally, print the grades and the average for each student.
@@ -25,3 +25,20 @@ for student, grades in gradebook.items():
     
     average = sum(grades) / len(grades)
     print(f"Student: {student} | Grades: {grades} | Average: {average:.2f}")
+
+# 3. Crie dois dicionários com conteúdos afins e em seguida junte os dois dicionários em uma lista. Mostre o conteúdo do dicionário.
+# 3. Create two dictionaries with related content and then join the two dictionaries into a list. Display the content of the dictionary.
+
+hardware = {
+    "Processor": "Ryzen 5 5600X",
+    "Graphics card": "GTX 1650"
+}
+
+peripherals = {
+    "Mouse": "ATK 9 Series",
+    "Keyboard": "HyperX Alloy Origins"
+}
+
+inventory = [hardware, peripherals]
+
+print(inventory)
