@@ -94,3 +94,10 @@ for name in names_tuple:
     random_dict[random_key] = name
 
 print(random_dict)
+
+# 6. Inicialize um dicionário onde as chaves serão nomes que estão em uma lista e os valores serão todos zero.
+# 6. Initialize a dictionary where the keys are names from a list and the values are all zero.
+
+names_list = ["Matheus", "Maria", "Jorge", "Pedro"]
+names_dict = dict.fromkeys(names_list, 0)
+print(names_dict)
