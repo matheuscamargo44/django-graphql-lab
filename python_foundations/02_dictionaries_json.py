@@ -1,4 +1,6 @@
 import random
+import os
+
 # 1. Cadastre em um dicionário 5 produtos e seus respectivos preços, depois mostre o conteúdo do dicionário com um produto por linha.
 # 1. Register 5 products and their respective prices in a dictionary, then show the dictionary content with one product per line.
 
@@ -126,3 +128,50 @@ my_dict = {
 }
 
 print(my_dict)
+
+# 9. Crie uma agenda de contatos contendo nome e celular de n pessoas, armazenados em um dicionário. Em seguida crie métodos para consultar, inserir, alterar e deletar itens neste dicionário. Os dados devem ser lidos pelo teclado.
+# 9. Create a contact book containing name and phone number of n people, stored in a dictionary. Then create methods to search, insert, update, and delete items. Data should be read via keyboard input.
+
+contacts = {}
+
+def add_contact():
+    name = input("Name: ")
+    phone = input("Phone: ")
+    contacts[name] = phone
+    print("Saved!")
+
+def search_contact():
+    name = input("Search Name: ")
+    result = contacts.get(name, "Not found.") 
+    print(f"Phone: {result}")
+
+def delete_contact():
+    name = input("Name to delete: ")
+    if name in contacts:
+        del contacts[name]
+        print("Deleted!")
+    else:
+        print("User not found.")
+
+def show_all():
+    print("\n Contact List ")
+    for name, phone in contacts.items():
+        print(f"{name}: {phone}")
+
+while True:
+    print("\n1. Add/Update  2. Search  3. Delete  4. List All  5. Exit")
+    option = input("Choose: ")
+
+    if option == '1':
+        add_contact()
+    elif option == '2':
+        search_contact()
+    elif option == '3':
+        delete_contact()
+    elif option == '4':
+        show_all()
+    elif option == '5':
+        print("Exiting...")
+        break
+    else:
+        print("Invalid option.")
