@@ -175,3 +175,47 @@ while True:
         break
     else:
         print("Invalid option.")
+
+# 10. Crie um dicionário onde a chave deverá ser o nome de um produto e o valor deverá ser uma lista onde constem o estoque do produto e seu preço, respec4vamente. Escreva um programa que controle as vendas e o estoque desses produtos. O programa deverá receber a quan4dade a ser comprada, exibir o valor da compra para aquele item e dar baixa no estoque. No final, o programa deverá mostrar o valor total da compra e o estoque atualizado.
+# 10. Create a dictionary where the key is a product name and the value is a list containing stock quantity and price. Write a program to control sales and inventory, handling user input for purchase quantity, updating stock, and calculating total cost.
+
+inventory = {
+    "Mouse": [10, 50.00],
+    "Keyboard": [5, 150.00],
+    "Monitor": [3, 800.00]
+}
+
+total_purchase = 0
+
+print(" Product List ")
+for item, data in inventory.items():
+    print(f"{item}: Stock {data[0]} | Price $ {data[1]:.2f}")
+
+while True:
+    product = input("\nProduct name (or 'exit' to finish): ")
+    
+    if product == 'exit':
+        break
+    
+    if product in inventory:
+        qty = int(input(f"Quantity of {product}: "))
+        
+        current_stock = inventory[product][0]
+        price = inventory[product][1]
+        
+        if qty <= current_stock:
+            cost = qty * price
+
+            inventory[product][0] -= qty 
+            total_purchase += cost
+            
+            print(f"Item Cost: $ {cost:.2f}")
+            print(f"Remaining Stock: {inventory[product][0]}")
+        else:
+            print(f"Error: Not enough stock! Only {current_stock} available.")
+    else:
+        print("Product not found.")
+
+print(f"\nTotal Purchase Value: $ {total_purchase:.2f}")
+print(" Updated Inventory ")
+print(inventory)
