@@ -117,3 +117,12 @@ for i in range(3):
 
     clients_dict[key_tuple] = data_list
 print(clients_dict)
+
+# 8. Crie um dicionário com 6 elementos(chave:valor), onde cada chave seja um número sequencial de 1 a 6 e o valor seja a chave multiplicada por 2, usando compreensão de dicionários (Dict Comprehension). Mostre o dicionário completo no final.
+# 8. Create a dictionary with 6 elements (key:value), where keys are sequential numbers from 1 to 6 and values are the keys multiplied by 2, using Dictionary Comprehension. Finally, show the complete dictionary.
+
+my_dict = {
+    x: x*2 for x in range(1, 7)
+}
+
+print(my_dict)
