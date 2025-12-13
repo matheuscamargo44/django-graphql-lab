@@ -101,3 +101,19 @@ print(random_dict)
 names_list = ["Matheus", "Maria", "Jorge", "Pedro"]
 names_dict = dict.fromkeys(names_list, 0)
 print(names_dict)
+
+# 7. Crie um dicionário onde a chave seja uma tupla com o CPF do cliente e o valor seja uma lista com seu nome e sua idade. Os dados deverão ser lidos pelo teclado. No final, mostre o conteúdo do dicionário.
+# 7. Create a dictionary where the key is a tuple containing the customer's CPF, and the value is a list with their name and age. Data should be read via keyboard input. Finally, show the dictionary content.
+
+clients_dict = {}
+
+for i in range(3):
+    cpf = input("Type the CPF: ")
+    name = input("Type the name: ")
+    age = int(input("Type the age: "))
+
+    key_tuple = (cpf,)
+    data_list = [name, age]
+
+    clients_dict[key_tuple] = data_list
+print(clients_dict)
