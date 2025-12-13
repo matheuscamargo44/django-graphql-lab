@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'graphene_django',
     'core',
+    'storages',
 ]
 
 MIDDLEWARE = [
