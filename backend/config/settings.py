@@ -122,7 +122,6 @@ STATIC_URL = 'static/'
 
 CORS_ALLOW_ALL_ORIGINS = True
 
-# GraphQL: Aponta para o arquivo de schema (vamos criar ele no próximo passo)
 GRAPHENE = {
     "SCHEMA": "config.schema.schema"
 }
