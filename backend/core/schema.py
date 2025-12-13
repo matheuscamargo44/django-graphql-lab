@@ -21,3 +21,21 @@ class Query(graphene.ObjectType):
             return Product.objects.get(pk=id)
         except Product.DoesNotExist:
             return None
+        
+class CreateProduct(graphene.Mutation):
+    product = graphene.Field(ProductType)
+
+    class Arguments:
+        name = graphene.String(required=True)
+        price = graphene.Decimal(required=True)
+        description = graphene.String()
+
+    def mutate(self, info, name, price, description=None):
+
+        product = Product(name=name, price=price, description=description)
+        product.save()
+
+        return CreateProduct(product=product)
+
+class Mutation(graphene.ObjectType):
+    create_product = CreateProduct.Field()
