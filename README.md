@@ -10,6 +10,22 @@ O objetivo principal é consolidar fundamentos e evoluir progressivamente para u
 
 ---
 
+## Development Configuration Notes | Notas de Configuração de Desenvolvimento
+
+To ensure a frictionless development experience during the laboratory, the `settings.py` is configured with weak security rules:
+
+Para garantir uma experiência de desenvolvimento sem atritos durante o laboratório, o `settings.py` está configurado com regras de segurança fracas:
+
+* **CORS Policy:** Open to all origins (`CORS_ALLOW_ALL_ORIGINS = True`). This allows any frontend (Mobile/Web) to consume the API without blocking.
+* **Debug Mode:** Enabled (`DEBUG = True`) to provide detailed stack traces for learning and debugging purposes.
+* **Allowed Hosts:** Wildcard enabled (`ALLOWED_HOSTS = ["*"]`) to accept requests from any container or local host.
+
+**Warning:** These settings must be hardened before any production deployment.
+
+**Aviso:** Estas configurações devem ser mudadas antes de qualquer deploy em produção.
+
+---
+
 ## Area of Study | Área de Estudo
 
 ### Language Foundations | Fundamentos da Linguagem
@@ -117,7 +133,7 @@ Para garantir a qualidade do código antes de commitar, use as ferramentas confi
 
 ```bash
 # Activate Virtual Environment (Windows PowerShell)
-.\backend\venv\Scripts\Activate
+.\\backend\\venv\\Scripts\\Activate
 
 # Run Formatter (fixes layout automatically)
 black .
