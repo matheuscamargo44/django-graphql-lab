@@ -1,151 +1,161 @@
 # Backend Architecture Lab
 
-This is a laboratory project focused on building a Backend API, applying modern microservices-oriented architecture concepts and professional development best practices.
+## Visão Geral
 
-Este é um projeto laboratorial focado na construção de uma API de Backend, aplicando conceitos de arquitetura moderna orientada a microsserviços e boas práticas de desenvolvimento profissional.
+Backend Architecture Lab é um projeto laboratorial focado na construção de uma API de Backend, aplicando conceitos modernos de arquitetura orientada a microsserviços e boas práticas profissionais de desenvolvimento de software.
 
-The main objective is to consolidate core fundamentals and progressively evolve toward an architecture close to real-world production environments.
-
-O objetivo principal é consolidar fundamentos e evoluir progressivamente para uma arquitetura próxima de ambientes reais de produção.
+O objetivo principal é consolidar fundamentos essenciais e evoluir progressivamente para uma arquitetura próxima de ambientes reais de produção.
 
 ---
 
-## Area of Study | Área de Estudo
+## Notas de Configuração de Desenvolvimento
 
-### Language Foundations | Fundamentos da Linguagem
+Para garantir uma experiência de desenvolvimento fluida durante o laboratório, o arquivo `settings.py` está configurado com regras de segurança propositalmente fracas:
 
-* Directory | Diretório: `python_foundations/`
-* Exercises and code drafts | Exercícios e rascunhos de código
-* Demonstrates Python proficiency | Demonstra domínio de Python:
+* **Política de CORS**: Aberta para todas as origens (`CORS_ALLOW_ALL_ORIGINS = True`), permitindo o consumo da API por qualquer frontend (Web/Mobile).
+* **Modo Debug**: Ativado (`DEBUG = True`) para exibir rastreamentos detalhados de erro.
+* **Allowed Hosts**: Configurado com wildcard (`ALLOWED_HOSTS = ["*"]`) para aceitar requisições de qualquer host ou container.
 
-  * Dictionary manipulation | Manipulação de dicionários
-  * Data structures | Estruturas de dados
-  * Basic and intermediate logic | Lógica básica e intermediária
+⚠️ **Aviso**: Essas configurações devem ser reforçadas antes de qualquer deploy em produção.
 
 ---
 
-### API and Business Logic | API e Lógica de Negócio
+## Áreas de Estudo
 
-* Directory | Diretório: `backend/`
-* Main API implementation using Django
-* Communication via GraphQL (Graphene)
-* Focus on:
+### Fundamentos da Linguagem
 
-  * Schemas
-  * Queries
-  * Mutations
+**Diretório:** `python_foundations/`
+
+Exercícios e rascunhos de código que demonstram domínio de Python:
+
+* Manipulação de dicionários
+* Estruturas de dados
+* Lógica básica e intermediária
+
+### API & Lógica de Negócio
+
+**Diretório:** `backend/`
+
+* Implementação principal da API utilizando **Django**
+* Comunicação via **GraphQL (Graphene)**
+
+#### Foco em
+
+* Schemas
+* Queries
+* Mutations
+
+### Arquitetura de Dados
+
+* **PostgreSQL** como banco de dados relacional
+* **MinIO** (armazenamento local compatível com S3) para arquivos de mídia
+
+O MinIO é utilizado para:
+
+* Simular o AWS S3 localmente com compatibilidade total de API
+* Permitir migração para AWS S3 apenas via configuração de variáveis de ambiente
+* Refletir arquiteturas modernas baseadas em cloud
 
 ---
 
-### Data Architecture | Arquitetura de Dados
+## Stack de Desenvolvimento
 
-* PostgreSQL as the relational database
-* MinIO (local S3-compatible storage) for media object storage
-* MinIO is used to simulate AWS S3 in a local environment, maintaining full compatibility with the S3 API
-* This approach allows migration to AWS S3 in production through environment configuration only
-* Architecture designed to reflect cloud-based production environments
-
----
-
-## Development Stack | Stack de Desenvolvimento
-
-| Component            | Technology         | Purpose                                  |
-| -------------------- | ------------------ | ---------------------------------------- |
-| Language / Framework | Python / Django    | Project foundation                       |
-| API / Communication  | GraphQL (Graphene) | Schema, Query and Mutation definition    |
-| Database             | PostgreSQL         | ORM usage and database migrations        |
-| Media Storage        | MinIO (S3 Local)   | S3-compatible file uploads               |
-| Orchestration        | Docker Compose     | Environment parity and service isolation |
+| Componente             | Tecnologia         | Finalidade                                |
+| ---------------------- | ------------------ | ----------------------------------------- |
+| Linguagem / Framework  | Python / Django    | Base do projeto                           |
+| API / Comunicação      | GraphQL (Graphene) | Definição de Schemas, Queries e Mutations |
+| Banco de Dados         | PostgreSQL         | ORM e migrações                           |
+| Armazenamento de Mídia | MinIO (S3 Local)   | Uploads compatíveis com S3                |
+| Qualidade de Código    | Flake8             | Linting e análise estática                |
+| Formatação             | Black              | Padronização automática de código         |
+| Orquestração           | Docker Compose     | Isolamento e paridade de ambiente         |
 
 ---
 
-## Quick Start Guide | Guia de Inicialização Rápida
-
-The environment is fully containerized and can be started from the project root.
+## Guia de Inicialização Rápida
 
 O ambiente é totalmente conteinerizado e pode ser iniciado a partir da raiz do projeto.
 
-### Prerequisites | Pré-requisitos
+### Pré-requisitos
 
-* Docker Desktop installed | Docker Desktop instalado
+* Docker Desktop instalado
+* Python 3.x (para linting e formatação local)
 
----
-
-### Environment Configuration | Configuração de Variáveis de Ambiente
-
-Create a `.env` file at the project root:
+### Configuração de Variáveis de Ambiente
 
 Crie um arquivo `.env` na raiz do projeto:
 
 ```env
-# Internal credentials for containers
+# PostgreSQL
 POSTGRES_HOST=db
 POSTGRES_DB=dev_db
 POSTGRES_USER=dev_user
 POSTGRES_PASSWORD=dev_pass
 
-# MinIO configuration
+# MinIO
 AWS_ACCESS_KEY_ID=dev_access
 AWS_SECRET_ACCESS_KEY=dev_secret
 AWS_S3_ENDPOINT_URL=http://minio:9000
 ```
 
----
-
-### Running the Environment | Rodando o Ambiente
+### Executando o Ambiente
 
 ```bash
-# Build images and start all services
+# Build das imagens e subida dos serviços
 docker-compose up -d
 
-# Apply database migrations (inside the web container)
+# Aplicar migrações do banco
 docker-compose exec web python backend/manage.py migrate
+```
+
+---
+
+## Desenvolvimento Local & Qualidade
+
+Antes de realizar commits, execute as ferramentas de qualidade no ambiente virtual local:
+
+```powershell
+# Ativar ambiente virtual (Windows PowerShell)
+.\\backend\\venv\\Scripts\\Activate
+
+# Formatador
+black .
+
+# Linter
+flake8 .
 ```
 
 ---
 
 ## Endpoints
 
-* GraphQL Playground: [http://127.0.0.1:8000/graphql](http://127.0.0.1:8000/graphql)
-* Django Admin Panel: [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/)
+* **GraphQL Playground**: [http://127.0.0.1:8000/graphql](http://127.0.0.1:8000/graphql)
+* **Painel Admin do Django**: [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/)
 
 ---
 
-This project is intentionally evolutionary and serves as a base for advanced studies in software architecture, cloud systems, scalability and backend engineering practices.
+## Filosofia do Projeto
 
-Este projeto é intencionalmente evolutivo e serve como base para estudos avançados em arquitetura de software, cloud, escalabilidade e práticas de engenharia de Backend.
+Este projeto é intencionalmente evolutivo e serve como base para estudos avançados em:
+
+* Arquitetura de software
+* Cloud computing
+* Escalabilidade
+* Boas práticas profissionais de engenharia de Backend
 
 ---
 
-## Official Documentation and References | Documentações e Referências Oficiais
+## Documentações Oficiais & Referências
 
-The technologies used in this laboratory provide official documentation recommended for deeper technical understanding.
-
-As tecnologias utilizadas neste laboratório possuem documentação oficial, recomendada para aprofundamento técnico.
-
-* Python
-  [https://docs.python.org/3/](https://docs.python.org/3/)
-
-* Django
-  [https://docs.djangoproject.com/](https://docs.djangoproject.com/)
-
-* GraphQL
-  [https://graphql.org/learn/](https://graphql.org/learn/)
-
-* Graphene (GraphQL for Django)
-  [https://docs.graphene-python.org/](https://docs.graphene-python.org/)
-
-* PostgreSQL
-  [https://www.postgresql.org/docs/](https://www.postgresql.org/docs/)
-
-* MinIO (S3 Compatible Storage)
-  [https://min.io/docs/](https://min.io/docs/)
-
-* AWS S3 (Production Reference)
-  [https://docs.aws.amazon.com/s3/](https://docs.aws.amazon.com/s3/)
-
-* Docker
-  [https://docs.docker.com/](https://docs.docker.com/)
-
-* Docker Compose
-  [https://docs.docker.com/compose/](https://docs.docker.com/compose/)
+* Python: [https://docs.python.org/3/](https://docs.python.org/3/)
+* Django: [https://docs.djangoproject.com/](https://docs.djangoproject.com/)
+* GraphQL: [https://graphql.org/learn/](https://graphql.org/learn/)
+* Graphene: [https://docs.graphene-python.org/](https://docs.graphene-python.org/)
+* PostgreSQL: [https://www.postgresql.org/docs/](https://www.postgresql.org/docs/)
+* MinIO: [https://min.io/docs/](https://min.io/docs/)
+* AWS S3: [https://docs.aws.amazon.com/s3/](https://docs.aws.amazon.com/s3/)
+* Black: [https://black.readthedocs.io/en/stable/](https://black.readthedocs.io/en/stable/)
+* Flake8: [https://flake8.pycqa.org/en/latest/](https://flake8.pycqa.org/en/latest/)
+* Conventional Commits: [https://www.conventionalcommits.org/](https://www.conventionalcommits.org/)
+* Docker: [https://docs.docker.com/](https://docs.docker.com/)
+* Docker Compose: [https://docs.docker.com/compose/](https://docs.docker.com/compose/)
