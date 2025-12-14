@@ -2,16 +2,17 @@ import graphene
 from graphene_django import DjangoObjectType
 from .models import Product
 
+
 class ProductType(DjangoObjectType):
     class Meta:
         model = Product
         fields = ("id", "name", "description", "price", "image", "created_at")
 
+
 class Query(graphene.ObjectType):
 
     all_products = graphene.List(ProductType)
     product = graphene.Field(ProductType, id=graphene.Int())
-
 
     def resolve_all_products(self, info):
         return Product.objects.all()
@@ -21,7 +22,8 @@ class Query(graphene.ObjectType):
             return Product.objects.get(pk=id)
         except Product.DoesNotExist:
             return None
-        
+
+
 class CreateProduct(graphene.Mutation):
     product = graphene.Field(ProductType)
 
@@ -36,6 +38,7 @@ class CreateProduct(graphene.Mutation):
         product.save()
 
         return CreateProduct(product=product)
+
 
 class Mutation(graphene.ObjectType):
     create_product = CreateProduct.Field()
